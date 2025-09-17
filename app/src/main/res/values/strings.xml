@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AndroidModuleAccessDemo</string>
+    <string name="payments">Payments</string>
+    <string name="demo_module_access_ui">Demo: Module Access UI</string>
+</resources>

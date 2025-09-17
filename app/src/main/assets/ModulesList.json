@@ -1,0 +1,25 @@
+{
+  "user": {
+    "userType": "active",
+    "coolingStartTime": "2025-09-17T12:30:00Z",
+    "coolingEndTime": "2025-09-17T13:30:00Z",
+    "accessibleModules": ["payments", "account_info"]
+  },
+  "modules": [
+    {
+      "id": "payments",
+      "title": "Payments",
+      "requiresConsent": true
+    },
+    {
+      "id": "account_info",
+      "title": "Account Info",
+      "requiresConsent": false
+    },
+    {
+      "id": "consent_center",
+      "title": "Consent Center",
+      "requiresConsent": true
+    }
+  ]
+}
