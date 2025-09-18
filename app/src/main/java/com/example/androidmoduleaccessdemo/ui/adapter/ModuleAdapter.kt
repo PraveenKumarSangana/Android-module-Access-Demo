@@ -10,7 +10,7 @@ import com.example.androidmoduleaccessdemo.model.Module
 class ModuleAdapter(
     private val modulesList: ArrayList<Module>,
     private val itemClickListener: ItemClickListener
-) : RecyclerView.Adapter<ModuleAdapter.ViewHolder>()  {
+) : RecyclerView.Adapter<ModuleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemCommonCardViewLayoutBinding.inflate(
@@ -24,7 +24,6 @@ class ModuleAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val data: Module = modulesList[position]
         holder.setData(data)
-
     }
 
     override fun getItemCount(): Int {
@@ -33,11 +32,9 @@ class ModuleAdapter(
 
     inner class ViewHolder(private val binding: ItemCommonCardViewLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
         @SuppressLint("SetTextI18n")
         fun setData(data: Module) {
             binding.tvModuleName.text = data.title
-
             binding.root.setOnClickListener {
                 itemClickListener.onItemClick(data)
             }

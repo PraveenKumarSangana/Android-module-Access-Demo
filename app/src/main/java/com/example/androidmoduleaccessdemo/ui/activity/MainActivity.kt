@@ -3,6 +3,7 @@ package com.example.androidmoduleaccessdemo.ui.activity
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -21,12 +22,10 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity(), ModuleAdapter.ItemClickListener {
 
     private var viewModel: MainViewModel = MainViewModel(MainRepository(this))
-
     private lateinit var binding: ActivityMainBinding
     private var moduleAdapter: ModuleAdapter? = null
     private var modulesList: ArrayList<Module> = ArrayList()
     private var user: User? = null
-
     private lateinit var accessManager: AccessManagerComponent
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +43,8 @@ class MainActivity : AppCompatActivity(), ModuleAdapter.ItemClickListener {
     private fun initRecyclerView() {
         binding.rvModules.apply {
             moduleAdapter = ModuleAdapter(modulesList, this@MainActivity)
-            layoutManager = LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
+            layoutManager =
+                LinearLayoutManager(this@MainActivity, LinearLayoutManager.VERTICAL, false)
             adapter = moduleAdapter
         }
     }
@@ -83,6 +83,22 @@ class MainActivity : AppCompatActivity(), ModuleAdapter.ItemClickListener {
         }
     }
 
-    override fun onItemClick(data: Module) {}
+    override fun onItemClick(data: Module) {
+        if (user?.userType == "active") {
+            val accessStatus = accessManager.getModuleAccessStatus(data)
+            when (accessStatus) {
+                "ACCESS_GRANTED" -> {
+                    Toast.makeText(
+                        this, "Navigating to ${data.title}", Toast.LENGTH_SHORT
+                    ).show()
+                }
+
+                else -> {
+                    Toast.makeText(this, accessStatus, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
 
 }
